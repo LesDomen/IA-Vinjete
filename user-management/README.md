@@ -1,5 +1,7 @@
 # User-Management microservice za eVinjete
 
+![Diagram](diagram.png "Diagram")
+
 ## Funkcionalne
 
 Registracija

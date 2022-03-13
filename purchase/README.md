@@ -1,5 +1,7 @@
 # Purchase microservice za eVinjete
 
+![Diagram](diagram.png "Diagram")
+
 ## Funkcionalne zahteve
 
 Vodenje možnih vinjet

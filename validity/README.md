@@ -1,5 +1,7 @@
 # Validity microservice za eVinjete
 
+![Diagram](diagram.png "Diagram")
+
 ## Funkcionalne zahteve
 
 Preverjanje veljavnosti glede na registrsko tablico
