@@ -1,0 +1,69 @@
+version: "3.9"
+services:
+  artemis:
+    image: quay.io/artemiscloud/activemq-artemis-broker:1.0.1
+    ports:
+      - "61616:61616"
+      - "5672:5672"
+      - "8161:8161"
+    environment:
+      AMQ_USER: "quarkus"
+      AMQ_PASSWORD: "quarkus"
+      AMQ_EXTRA_ARGS: "--relax-jolokia"
+
+  mongo:
+    image: mongo:5
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "quarkus"
+      MONGO_INITDB_ROOT_PASSWORD: "quarkus"
+    ports:
+      - "27017:27017"
+    volumes:
+      - './data:/data/db'
+
+
+  authentication:
+    container_name: authentication
+    image: registry.gitlab.com/domenlum/sua-microservices/authentication
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      RABBIT_URL: amqp://guest:guest@rabbitmq:5672/
+      MONGO_PASS: quarkus
+      MONGO_USER: quarkus
+      MONGO_IP: mongo
+      JWT_SECRET: wsdefrgthzjkkjhzgtfr
+    ports:
+      - "8001:8001"
+      - "8002:8002"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5673:5672"
+      - "15672:15672"
+
+  nakup:
+    image: nakup:0.0.1-SNAPSHOT
+    container_name: 'nakup'
+    depends_on:
+      - mongo
+    ports:
+      - "8081:8080"
+    environment:
+      MONGO_IP: mongo
+
+  veljavnost:
+    image: veljavnost:latest
+    container_name: veljavnost
+    depends_on:
+      - mongo
+      - artemis
+    ports:
+      - "8082:8080"
+    environment:
+      MONGO_IP: mongo
+      ARTEMIS_IP: artemis
+
