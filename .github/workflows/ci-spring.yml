@@ -35,6 +35,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: maven build image
-        run: cd purchase && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/LesDomen/ia-purchase
+        run: cd purchase && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/lesdomen/ia-purchase
       - name: docker push
         run: docker image push ghcr.io/LesDomen/ia-purchase:latest
