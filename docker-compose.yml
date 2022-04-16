@@ -46,7 +46,7 @@ services:
       - "15672:15672"
 
   nakup:
-    image: nakup:0.0.1-SNAPSHOT
+    image: ghcr.io/lesdomen/ia-purchase
     container_name: 'nakup'
     depends_on:
       - mongo
@@ -56,7 +56,7 @@ services:
       MONGO_IP: mongo
 
   veljavnost:
-    image: veljavnost:latest
+    image: ghcr.io/lesdomen/ia-validity-native
     container_name: veljavnost
     depends_on:
       - mongo
