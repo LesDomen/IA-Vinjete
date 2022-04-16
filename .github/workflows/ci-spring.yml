@@ -1,4 +1,4 @@
-name: ci-native
+name: ci-spring
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: ci-native
+  group: ci-spring
 
 jobs:
   build-native:
