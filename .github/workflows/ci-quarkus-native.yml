@@ -36,4 +36,4 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: gradle build push native
-        run: ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Dquarkus.container-image.push=true -Dquarkus.container-image.image=ghcr.io/LesDomen/ia-validity.native:latest '-Dquarkus.jib.labels."org.opencontainers.image.revision"='$GITHUB_SHA
+        run: cd validity && ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Dquarkus.container-image.push=true -Dquarkus.container-image.image=ghcr.io/LesDomen/ia-validity.native:latest '-Dquarkus.jib.labels."org.opencontainers.image.revision"='$GITHUB_SHA
