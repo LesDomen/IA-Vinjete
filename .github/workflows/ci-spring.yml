@@ -37,4 +37,4 @@ jobs:
       - name: gradle build push
         run: cd purchase && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/LesDomen/ia-purchase:latest
       - name: docker push
-      - run: docker image push ghcr.io/LesDomen/ia-purchase:latest
+        run: docker image push ghcr.io/LesDomen/ia-purchase:latest
