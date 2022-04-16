@@ -30,7 +30,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: gradle build push native
-        run: cd validity && ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true -Dquarkus.container-image.image=ghcr.io/lesdomen/ia-validity-native:latest '-Dquarkus.jib.labels."org.opencontainers.image.revision"='$GITHUB_SHA
+        run: cd validity && ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+      - name: docker build
+        run: docker build -f src/main/docker/Dockerfile.native-micro -t ghcr.io/lesdomen/ia-validity-native:latest .
       - name: docker push
         run: docker image push ghcr.io/lesdomen/ia-validity-native:latest
 
