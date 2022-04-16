@@ -16,7 +16,7 @@ concurrency:
   group: ci-spring
 
 jobs:
-  build-native:
+  build-image:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -34,7 +34,7 @@ jobs:
           logout: true
       - name: checkout
         uses: actions/checkout@v2
-      - name: gradle build push
-        run: cd purchase && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/LesDomen/ia-purchase:latest
+      - name: maven build image
+        run: cd purchase && ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ghcr.io/LesDomen/ia-purchase
       - name: docker push
         run: docker image push ghcr.io/LesDomen/ia-purchase:latest
