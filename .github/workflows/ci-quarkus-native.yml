@@ -2,13 +2,13 @@ name: ci-native
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - ".github/workflows/ci-quarkus-native.yml"
       - "validity/**"
       - "docker-compose.yaml"
   pull_request:
-    branches: [master]
+    branches: [main]
 
 permissions:
   packages: write
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build-native:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: JDK 11
