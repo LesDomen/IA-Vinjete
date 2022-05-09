@@ -30,10 +30,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - uses: actions/setup-node@v3
-          with:
-            node-version: 14
+        with:
+          node-version: 14
       - name: yarn install build
-        run:  cd front-end/front-end/ia-vinjete-frontend/ && yarn install && yarn build
+        run: cd front-end/front-end/ia-vinjete-frontend/ && yarn install && yarn build
       - name: build docker image
         run: cd front-end/front-end/ia-vinjete-frontend/ && docker build -t ghcr.io/lesdomen/ia-frontend:latest .
       - name: docker push
