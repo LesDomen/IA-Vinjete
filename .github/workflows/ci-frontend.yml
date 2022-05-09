@@ -33,8 +33,8 @@ jobs:
         with:
           node-version: 14
       - name: yarn install build
-        run: cd front-end/front-end/ia-vinjete-frontend/ && yarn install && yarn build
+        run: cd front-end/ia-vinjete-frontend/ && yarn install && yarn build
       - name: build docker image
-        run: cd front-end/front-end/ia-vinjete-frontend/ && docker build -t ghcr.io/lesdomen/ia-frontend:latest .
+        run: cd front-end/ia-vinjete-frontend/ && docker build -t ghcr.io/lesdomen/ia-frontend:latest .
       - name: docker push
         run: docker image push ghcr.io/lesdomen/ia-frontend:latest
