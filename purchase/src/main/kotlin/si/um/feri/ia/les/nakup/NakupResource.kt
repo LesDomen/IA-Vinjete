@@ -4,6 +4,7 @@ import jakarta.websocket.server.PathParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
@@ -14,7 +15,7 @@ class NakupResource {
     lateinit var repository: EVinjetaRepository
 
     @GetMapping("/nakup")
-    fun kupiVinjeto(@PathParam("id") tablica: String, @PathParam("trajanje") trajanje: Int): String {
+    fun kupiVinjeto(@RequestParam("tablica") tablica: String,@RequestParam("trajanje") trajanje: Integer): String {
 
         return try {
             repository.insert(

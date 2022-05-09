@@ -67,3 +67,10 @@ services:
       MONGO_IP: mongo
       ARTEMIS_IP: artemis
 
+  front-end:
+    image: fe
+    ports:
+     - "80:80"
+     - "443:443"
+
+
