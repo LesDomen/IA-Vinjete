@@ -68,11 +68,11 @@ services:
       ARTEMIS_IP: artemis
 
   front-end:
+    image: ghcr.io/lesdomen/ia-frontend:latest
     depends_on:
      - veljavnost
      - nakup
      - authentication
-    image: fe
     ports:
      - "80:80"
      - "443:443"
