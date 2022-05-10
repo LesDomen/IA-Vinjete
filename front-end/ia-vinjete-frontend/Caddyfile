@@ -1,4 +1,4 @@
-localhost {
+http:// {
     encode zstd gzip
 
     route /auth/* {

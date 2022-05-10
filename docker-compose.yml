@@ -1,4 +1,5 @@
-version: "3.9"
+version: "3"
+
 services:
   artemis:
     image: quay.io/artemiscloud/activemq-artemis-broker:1.0.1
@@ -10,6 +11,10 @@ services:
       AMQ_USER: "quarkus"
       AMQ_PASSWORD: "quarkus"
       AMQ_EXTRA_ARGS: "--relax-jolokia"
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
   mongo:
     image: mongo:5
@@ -17,9 +22,13 @@ services:
       MONGO_INITDB_ROOT_USERNAME: "quarkus"
       MONGO_INITDB_ROOT_PASSWORD: "quarkus"
     ports:
-      - "27017:27017"
+      - "27017"
     volumes:
       - './data:/data/db'
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
 
   authentication:
@@ -35,15 +44,23 @@ services:
       MONGO_IP: mongo
       JWT_SECRET: wsdefrgthzjkkjhzgtfr
     ports:
-      - "8001:8001"
-      - "8002:8002"
+      - "8001"
+      - "8002"
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
-      - "5673:5672"
-      - "15672:15672"
+      - "5672"
+      - "15672"
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
   nakup:
     image: ghcr.io/lesdomen/ia-purchase
@@ -51,9 +68,13 @@ services:
     depends_on:
       - mongo
     ports:
-      - "8081:8080"
+      - "8080"
     environment:
       MONGO_IP: mongo
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
   veljavnost:
     image: ghcr.io/lesdomen/ia-validity-native
@@ -62,10 +83,14 @@ services:
       - mongo
       - artemis
     ports:
-      - "8082:8081"
+      - "8081"
     environment:
       MONGO_IP: mongo
       ARTEMIS_IP: artemis
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
   front-end:
     image: ghcr.io/lesdomen/ia-frontend:latest
@@ -76,5 +101,9 @@ services:
     ports:
      - "80:80"
      - "443:443"
+    labels:
+      kompose.service.expose: "localhost"
+      kompose.service.group: "ia"
+      kompose.service.type: LoadBalancer
 
 
